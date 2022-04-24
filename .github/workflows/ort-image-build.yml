@@ -9,7 +9,7 @@ on: [workflow_call, workflow_dispatch] # yamllint disable-line rule:truthy
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME_BASE: ort-base
-  IMAGE_NAME_CI: ort-ci
+  IMAGE_NAME_CI: ort-ci-base
 
 jobs:
   build-and-push-image:
