@@ -1,4 +1,5 @@
 ---
+# Using the default example rules from the repolint but removed some items (support.md, security.md)
 "$schema": "./schema.json"
 version: 2
 axioms:
