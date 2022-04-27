@@ -6,9 +6,15 @@ SPDX-License-Identifier: CC0-1.0
 
 # ORT CI Base
 
-NOTE: REPO IN TESTING PHASE; GIT HISTORY WILL BE RESET WHEN/IF PROJECT IS   "good enough" for an initial commit and pass the experimental phase, so if you clone it, dont expect to much, and dont use it "for real" yet, things will break
+NOTE: REPO IN TESTING/POC PHASE; GIT HISTORY WILL BE RESET WHEN/IF PROJECT IS   "good enough" for an initial commit and pass the experimental phase, so if you clone it, dont expect anything, and dont use it "for real" yet, things will break, both in feature and logic. This project is unofficial, and not under the ORT umbrella.
 
 A base project for easier builds of CI integrations using the powerful [ORT (OSS Review Toolkit)](https://github.com/oss-review-toolkit/ort).
+
+Related siblings projects are:
+
+- [ORT CI ACTION](https://github.com/janderssonse/ort-ci-action) - A GitHub Action for running ORT in CI
+- [ORT CI GitLab](https://github.com/janderssonse/ort-ci-gitlab) - A GitLab CI template for running ORT in CI
+- [ORT CI Tekton]--TO-DO
 
 ## Table of Contents
 
@@ -20,11 +26,11 @@ A base project for easier builds of CI integrations using the powerful [ORT (OSS
 
 ## Background
 
-Why this? I needed a simpel way to simply ORT in CI pipelines using GitHub/GitLab.
-There existed an official project for GitLab [ort-gitlab-ci](https://github.com/oss-review-toolkit/ort-gitlab-ci), and a few thirdparty GitHub-actions.
-As I started testing, there were a few things that would not work in my workflows, being to tight to the implementation in some places.
-But the main logic (the wrapper scripts etc) could be adapted in general CI-implementation, with minor adjustments, so why not.
-Instead of taking my shots at start submitting PRs to upstreams and hoping for that they would be accepted soon, I decided to instead make a few PoCs of I how would make it work, and see where I would end up.
+Why this? I needed a simple way to run ORT in CI pipelines using GitHub/GitLab.
+There already existed an official project for GitLab [ort-gitlab-ci](https://github.com/oss-review-toolkit/ort-gitlab-ci), and a few thirdparty GitHub-actions.
+As I started testing that, there were a few things that would not work in my usecase, being to tight to the implementation in some places.
+But the main logic (the wrapper scripts etc) could easily be adapted in to a general implementation, with minor adjustments, so why not extract that a bit.
+Instead of taking my shots at start submitting PRs to upstreams and hoping for that (the ORT project) would accepted my ideas,  I decided to instead make a few PoCs first.
 
 After a few after-work evenings hack sessions I had:
 * extracted those scripts to this project
@@ -33,34 +39,32 @@ After a few after-work evenings hack sessions I had:
 * added tests (bats-core) and made it more testable by dividing into functions etc.
 * clearly separated image building and workflow runs
 
-Togheter with this I created the PoC GitHub action/revised GitLab CI project.
+And with this Base I could the PoC GitHub action/revised GitLab CI project mentioned earlier.
 
-The future is unknown. It works for me currently, and it was fun to work on. I think I will add more CI variants time allowing. Should the ORT project want to use anything from these projects, I would gladly see it there instead of under my user.
+The future is unknown. It works for my use cases currently I will clean it up more, test and document it as it was fun to work on. I think I will add more CI variants time allowing. Should the ORT project want to use anything from these projects in the future, I would gladly see it there instead of under my user.
 
-Note: I think the scrips with would be quite easy to submit as PRs to the upstreams GitLab project really, in small steps if the would want to use the modifed scripts with tests added or/and head this way.
+Note: I think the scripts with would be quite easy to submit as PRs to the upstreams GitLab project really, in small steps if the would want to use the modified scripts with tests added or/and head this way. I made efforts to not stray away from them, reusing same variables, mostly same logic, just making things more configurable.
 
 ## Usage
 
-The project contains wrapper scripts and templates, and is not intended for direct usage.
+The project contains wrapper scripts and templates, and is not intended for a direct usage.
 Instead, see [ORT CI Action](https://github.com/janderssonse/ort-ci-action) and [ORT CI GitLab](https://github.com/janderssonse/ort-ci-gitlab) for different integrations around it, how to use it.
-There you will also find a description of each and every variable in the scripts.
-
-Basically, to create a new implementation you would clone this repo in your CI integration and use the src/ort_ci_main.sh main to run it.
 
 
 ### Development
+
+Basically, to create a new implementation you would clone this repo in your CI integration and use the src/ort_ci_main.sh main to run it, sending in environment variables.
 
 #### Structure
 
 - /src contains the main scripts.
 
-- /templates is intended to contain a few default templats for convinience, TO-DO
+- /templates is intended to contain a few default templates for convenience, TO-DO a bit more work around this
+- /docker contains CI-specific additions needed by ORT CI besides the original ORT Project Dockerfile.
 
-- /docker contains ci-specific additons that is needed by ORT besides the original ORT-Dockerfile.
+#### Unit tests
 
-#### Testing
-
-Install the bats-core with libs (they will end up under ./test/lib/)
+Install the Bash test framework [bats-core](https://github.com/bats-core/bats-core) with libs (they will end up under ./test/lib/)
 
 ```console
 ./test/install_bats.bash
@@ -78,12 +82,12 @@ Run the bats-core tests
 
 The project is using a few hygiene linters:
 
-[MegaLinter](https://megalinter.github.io/latest/) - for shell, markdown etc check.
-[Repolinter](https://github.com/todogroup/repolinter) - for overall repostructre.
+[MegaLinter](https://megalinter.github.io/latest/) - for shell, markdown etc. check.
+[Repolinter](https://github.com/todogroup/repolinter) - for overall repo structure.
 [commitlint](https://github.com/conventional-changelog/commitlint) - for conventional commit check.
 [REUSE Compliance Check](https://github.com/fsfe/reuse-action) - for reuse specification compliance.
 
-Before commiting a PR, please have run with this linters to avoid red checks. If forking on GitHub, you can adjust them to work for fork in the .github/workflow-files.
+Before committing a PR, please have run with this linters to avoid red checks. If forking, they are already set up for your and will check your fork too (as GitHub actions). But, you can always adjust/disable them to work for fork in the .github/workflow-files during dev.
 
 ## Maintainers
 
@@ -91,28 +95,27 @@ Before commiting a PR, please have run with this linters to avoid red checks. If
 
 ## Contributing
 
-ORT CI Base follows the [Contributor Covenant](http://contributor-covenant.org/version/1/3/0/) Code of Conduct.
+ORT CI Base follows the [Contributor Covenant](http://contributor-covenant.org/version/1/3/0/) Code of Conduct.  
 Please also see the [Contributor Guide](docs/CONTRIBUTING.adoc)
 
 
 ## License
 
-Scripts under /src and docker/Dockerfile.ci are
+Scripts under /src and /docker/Dockerfile.ci are
 
 Copyright (C) 2020-2022 HERE Europe B.V.
 (but with additions/refactoring)
 Copyright (C) 2022 Josef Andersson)
 
-The main project is under
+The main project is otherwise under
 
 [MIT](LICENSE)
 
-See .reuse/dep5 and file headers for further information.
-Most "scrap" files, textfiles etc are under CC0-1.0, essentially Public Domain.
+See .reuse/dep5 and file headers for further information, most "scrap" files, configuration files etc. are under CC0-1.0, essentially Public Domain.
 
 ## Credits
 
-Thanks to the [ORT (OSS Review Toolkit) Project](https://github.com/oss-review-toolkit/ort), for developing such a powerful tool. It fills a void in SCA-toolspace.
+Thanks to the [ORT (OSS Review Toolkit) Project](https://github.com/oss-review-toolkit/ort), for developing such a powerful tool. It fills a void in the SCA toolspace.
 
 ## F.A.Q
 
