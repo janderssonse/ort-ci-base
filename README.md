@@ -82,10 +82,10 @@ Run the bats-core tests
 
 The project is using a few hygiene linters:
 
-[MegaLinter](https://megalinter.github.io/latest/) - for shell, markdown etc. check.
-[Repolinter](https://github.com/todogroup/repolinter) - for overall repo structure.
-[commitlint](https://github.com/conventional-changelog/commitlint) - for conventional commit check.
-[REUSE Compliance Check](https://github.com/fsfe/reuse-action) - for reuse specification compliance.
+- [MegaLinter](https://megalinter.github.io/latest/) - for shell, markdown etc. check.
+- [Repolinter](https://github.com/todogroup/repolinter) - for overall repo structure.
+- [commitlint](https://github.com/conventional-changelog/commitlint) - for conventional commit check.
+- [REUSE Compliance Check](https://github.com/fsfe/reuse-action) - for reuse specification compliance.
 
 Before committing a PR, please have run with this linters to avoid red checks. If forking, they are already set up for your and will check your fork too (as GitHub actions). But, you can always adjust/disable them to work for fork in the .github/workflow-files during dev.
 
