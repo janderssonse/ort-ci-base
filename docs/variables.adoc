@@ -1,0 +1,159 @@
+
+Due to convention: +
+GitLab will use UPPER CASE +
+GitHub lower case for variable names. Change depending on CI. +
+
+.Environment variables description
+[stripes=even]
+|===
+|Variable |Description |Default|Note 
+
+|DISABLE_SHALLOW_CLONE
+|If 'true', the full history of the project is cloned.
+ This option works only if VCS_TYPE is 'git'.
+ Check this option only if you know that it is required for your scan.
+ Will fail if not ORT_DISABLE_DOWNLOADER is set to false
+ (the default CI checkout is used otherwise).
+|false
+|
+
+|FAIL_ON_OUTDATED_NOTICE_FILE:
+|If 'true', the scan will be considered as failed if generated NOTICE file differs from the one in your repository.
+|false
+|
+
+|NOTICE_FILE:
+|Path to open source attribution document relative to the VCS root.
+ If empty 'FOSS_NOTICE' is used as default.
+|FOSS_NOTICE
+|
+
+|ORT_ALLOW_DYNAMIC_VERSIONS:
+|Set to 'true' only if dynamic dependency versions are allowed (note version ranges specified for dependencies may cause unstable results).
+This field applies only to package managers that support lock files, e.g. NPM.
+|false
+|
+
+|ORT_CONFIG_REPO_URL:
+|Url to a git repo containing configuration, defaults to the ORT CONFIG repo.
+|https://github.com/oss-review-toolkit/ort-config.git
+|
+
+|ORT_CONFIG_REVISION:
+|The Git revision of the ORT configuration repository to use.
+|main
+|
+
+|ORT_DISABLE_ADVISOR:
+|If 'true', ORT's advisor will not run (no security vulnerability checks).
+|true
+|
+
+|ORT_DISABLE_DOWNLOADER:
+|If 'true', ORT's downloader will not run (no project download by ort itself). 
+For example, GitLab/GitHub has per default already cloned your project, so you don't need to use ORT.
+|true
+|
+
+|ORT_DISABLE_EVALUATOR:
+|If 'true', ORT's evaluator will not run (no policy checks).
+|true
+|
+
+|ORT_DISABLE_SCANNER:
+|If 'true', ORT's scanner will not run (no copyright holders and licenses scan).
+|true
+|
+  
+|ORT_LOG_LEVEL:
+|'debug' to see additional debug output to help tracking down errors.
+ 'performance' for less logs.
+ 'info' as default.
+|info
+|
+
+|ORT_USE_DEV_DB:
+|If 'true', download/upload scanned results from/to development database.
+|false
+|
+
+|ORT_URL:
+|Where to get the ORT code base.
+|https://github.com/oss-review-toolkit/ort.git
+|
+
+|ORT_DOCKER_IMAGE:
+|The CI Docker ORT Image to use
+|$ORT_CI_DOCKER_IMAGE
+|
+
+|ORT_CONFIG_FILE:
+|Path to repository configuration file relative to the VCS root.
+ If empty '.ort.yml' is used as default.
+|
+|
+
+|PROJECT_DIR:
+|Path to actual cloned project folder in the CI-pipe.
+ Defaults to 'project'.
+|project
+|
+  
+|RUNNER_TAG
+|Runner tag
+|k8s
+|N/A on GitHub, as the runs-on: tagging is decided by the end user in their workflow.yml.
+
+|VCS_PATH:
+|Leave this field empty unless one of the following special cases applies:
+        project VCS_TYPE is git-repo - specify path to repo manifest file (e.g. olympia.xml, note VCS_URL must point to a manifest repository)
+        you require sparse checkout - specify repository sub-path to download and scan (e.g. projects/gradle/, note sparse checkout is
+        possible only for VCS_TYPE git, mercurial or subversion).
+|
+|
+
+|SW_NAME:
+|Name of project, product or component to be scanned.
+ By default the name of the repository is used as shown in its clone URL.
+ Only used if ORT_DISABLE_DOWNLOADER is set to false.
+|
+|
+ 
+|SW_VERSION:
+|Project version number or release name (use the version from package metadata, not VCS revision).
+By default, the Git Short SHA is used.
+Only used if ORT_DISABLE_DOWNLOADER is set to false
+|
+|
+
+|VCS_REVISION:
+|SHA1 or tag to scan (not branch names, because they can move).
+ If VCS_TYPE is 'git-repo':
+ SHA1 must be unabbreviated, tag names must be prefixed with 'refs/tags/'.
+ By default, the Git Commit SHA is used.
+ Only used if ORT_DISABLE_DOWNLOADER is set to false.
+|
+|
+
+|VCS_TYPE:
+|Identifier of the project version control system (git, git-repo, mercurial or subversion).
+      Only used if ORT_DISABLE_DOWNLOADER is set to false.
+|git
+|
+
+|VCS_URL:
+|VCS URL (clone URL) of the project to scan, use only when URL is not correctly detected.
+ Only used if ORT_DISABLE_DOWNLOADER is set to false.
+|
+|
+
+|ORT_CI_BASE_REPO_URI:
+|URI to the ORT CI Base repo. It contains the basic scripts for which different CI wrappers are built.
+|https://github.com/janderssonse/ort-ci-base
+|
+
+|ORT_CI_BASE_BRANCH:
+|Script repo, dev help. Check out another branch.
+|main
+|
+|===

@@ -20,8 +20,8 @@ Related siblings projects are:
 
 - [Background](#background)
 - [Usage](#usage)
-- [Maintainers](#maintainers)
 - [Contributing](#contributing)
+- [Maintainers](#maintainers)
 - [License](#license)
 
 ## Background
@@ -41,7 +41,7 @@ After a few after-work evenings hack sessions I had:
 
 And with this Base I could the PoC GitHub action/revised GitLab CI project mentioned earlier.
 
-The future is unknown. It works for my use cases currently I will clean it up more, test and document it as it was fun to work on. I think I will add more CI variants time allowing. Should the ORT project want to use anything from these projects in the future, I would gladly see it there instead of under my user.
+The future is unknown. It works for my use cases currently, I will clean it up, test and document it further. I think I will add more CI variants time allowing. Should the ORT project want to use anything from these projects in the future, I would gladly see it there instead of under my user.
 
 Note: I think the scripts with would be quite easy to submit as PRs to the upstreams GitLab project really, in small steps if the would want to use the modified scripts with tests added or/and head this way. I made efforts to not stray away from them, reusing same variables, mostly same logic, just making things more configurable.
 
@@ -50,6 +50,7 @@ Note: I think the scripts with would be quite easy to submit as PRs to the upstr
 The project contains wrapper scripts and templates, and is not intended for a direct usage.
 Instead, see [ORT CI Action](https://github.com/janderssonse/ort-ci-action) and [ORT CI GitLab](https://github.com/janderssonse/ort-ci-gitlab) for different integrations around it, how to use it.
 
+Please also see the [Description of input variables](docs/variables.adoc)
 
 ### Development
 
@@ -89,15 +90,14 @@ The project is using a few hygiene linters:
 
 Before committing a PR, please have run with this linters to avoid red checks. If forking, they are already set up for your and will check your fork too (as GitHub actions). But, you can always adjust/disable them to work for fork in the .github/workflow-files during dev.
 
-## Maintainers
-
-[Josef Andersson](https://github.com/janderssonse).
-
 ## Contributing
 
 ORT CI Base follows the [Contributor Covenant](http://contributor-covenant.org/version/1/3/0/) Code of Conduct.  
 Please also see the [Contributor Guide](docs/CONTRIBUTING.adoc)
 
+## Maintainers
+
+[Josef Andersson](https://github.com/janderssonse).
 
 ## License
 
