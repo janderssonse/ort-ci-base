@@ -28,7 +28,7 @@ else
   ORT_ANALYZER_OPTIONS=""
 fi
 
-if [[ -n "$ORT_CONFIG_FILE" ]]; then
+if [[ -n "$ORT_CONFIG_FILE" -a -r "$ORT_CONFIG_FILE" ]]; then
   ORT_ANALYZER_OPTIONS="$ORT_ANALYZER_OPTIONS --repository-configuration-file $CI_PROJECT_DIR/$ORT_CONFIG_FILE"
 fi
 
