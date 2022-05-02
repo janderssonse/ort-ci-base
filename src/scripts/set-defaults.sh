@@ -6,15 +6,16 @@ export DISABLE_SHALLOW_CLONE=${DISABLE_SHALLOW_CLONE:-"false"}
 export FAIL_ON_OUTDATED_NOTICE_FILE=${FAIL_ON_OUTDATED_NOTICE_FILE:-"false"}
 export ORT_CONFIG_REVISION=${ORT_CONFIG_REVISION:-"main"}
 export ORT_CONFIG_REPO_URL=${ORT_CONFIG_REPO_URL:-"https://github.com/oss-review-toolkit/ort-config.git"}
+export PROJECT_DIR=${PROJECT_DIR:-'project'}
+export ORT_CONFIG_FILE=${ORT_DISABLE_DOWNLOADER:-'.ort.yml'}
 export ORT_DISABLE_ADVISOR=${ORT_DISABLE_ADVISOR:-"true"}
+export ORT_DISABLE_DOWNLOADER=${ORT_DISABLE_DOWNLOADER:-"false"}
 export ORT_DISABLE_EVALUATOR=${ORT_DISABLE_EVALUATOR:-"false"}
 export ORT_DISABLE_SCANNER=${ORT_DISABLE_SCANNER:-"true"}
 export ORT_LOG_LEVEL=${ORT_LOG_LEVEL:-"performance"}
 export ORT_USE_DEV_DB=${ORT_USE_DEV_DB:-"false"}
 export NOTICE_FILE=${NOTICE_FILE:-"FOSS_NOTICE"}
 export SW_NAME=${SW_NAME:-"$UPSTREAM_PROJECT_TITLE"}
-export SW_VERSION=${SW_VERSION:-"${VCS_REVISION:0:7}"}
-export VCS_URL=${VCS_URL:-"ssh://git@${CI_SERVER_HOST}/${UPSTREAM_PROJECT_PATH}"}
 export VCS_REVISION=${VCS_REVISION:-"$UPSTREAM_COMMIT_SHA"}
 
 # Save variable values in vars.env so we can use them in after_script.

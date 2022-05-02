@@ -68,13 +68,11 @@ function github_ci_adapter_sets_expected_vars { #@test
 
   assert_equal "$SW_VERSION" "7654321"
   assert_equal "$SW_NAME" 'repo'
-  assert_equal "$VCS_REVISION" '76543210'
   assert_equal "$VCS_URL" 'ssh://git@gh_server_url/namespace/repo'
 
   #Assert values that have defaults use the set given value instead
   local SW_VERSION='12101112'
   local SW_NAME='gh_sw_name'
-  local VCS_REVISION='gh_vcs_rev'
   local VCS_URL='gh_vcs_url'
   local ORT_OPTS='-xmx'
 
@@ -83,7 +81,6 @@ function github_ci_adapter_sets_expected_vars { #@test
 
   assert_equal $SW_VERSION '1210111'
   assert_equal $SW_NAME 'gh_sw_name'
-  assert_equal $VCS_REVISION 'gh_vcs_rev'
   assert_equal $VCS_URL 'gh_vcs_url'
 
 }
@@ -118,24 +115,18 @@ function gitlab_ci_adapter_sets_expected_vars { #@test
   assert_equal "$ORT_CONFIG_DIR" 'ci_builds_dir/ort-configuration'
 
   assert_equal "$SW_VERSION" "0123456"
-  assert_equal "$SW_NAME" 'ci_project_title'
-  assert_equal "$VCS_REVISION" '12345678'
   assert_equal "$VCS_URL" 'ssh://git@ci_server_host/ci_project_path'
   #assert_equal "$ORT_CLI_CONFIG_FILE" "$ORT_CONFIG_DIR/ort.conf"
 
   # Assert vars  with defaults use their set values
 
   local SW_VERSION='89101112'
-  local SW_NAME='sw_name'
-  local VCS_REVISION='vcs_rev'
   local VCS_URL='vcs_url'
 
   gitlab_ci_adapter
   assert_success
 
   assert_equal $SW_VERSION '8910111'
-  assert_equal $SW_NAME 'sw_name'
-  assert_equal $VCS_REVISION 'vcs_rev'
   assert_equal $VCS_URL 'vcs_url'
 
 }
@@ -152,9 +143,6 @@ function ort_conf_sets_expected_values { #@test
   ort_conf
   assert_success
 
-  assert_equal "$PROJECT_DIR" 'project'
-  #assert_equal "$ORT_SCRIPTS_DIR" 'path/scripts'
-
   assert_equal "$ORT_CLI" '/opt/ort/bin/ort'
   assert_equal "$ORT_ADVISOR_PROVIDERS" 'OssIndex'
   assert_equal "$ORT_DATA_DIR" '.ort'
@@ -169,13 +157,6 @@ function ort_conf_sets_expected_values { #@test
 
   assert_equal "$ORT_OPTS" '"-xmx"'
 
-  #Test vars with non default opts
-  local PROJECT_DIR='custom_dir'
-
-  ort_conf
-  assert_success
-
-  assert_equal "$PROJECT_DIR" 'custom_dir'
 }
 
 function ort_conf_files_sets_expected_values { #@test

@@ -41,12 +41,11 @@ github_ci_adapter() {
 
   export ORT_CONFIG_DIR="${GITHUB_WORKSPACE}/ort-configuration"
 
-  # ---The ORT DOWNLOADER PRE REQ
+  # ---ORT DOWNLOADER prereq
   local SHORT_SHA="${SW_VERSION:-$GITHUB_SHA}"
   SW_VERSION="$(echo "${SHORT_SHA}" | cut -c1-7)"
   export SW_VERSION
   export SW_NAME="${SW_NAME:-$REPONAME}"
-  export VCS_REVISION="${VCS_REVISION:-$GITHUB_SHA}"
   export VCS_URL="${VCS_URL:-"ssh://git@${GITHUB_SERVER_URL}/${UPSTREAM_PROJECT_PATH}"}"
   #-----------------------------
 
@@ -61,12 +60,10 @@ gitlab_ci_adapter() {
 
   export ORT_CONFIG_DIR="${CI_BUILDS_DIR}/ort-configuration"
 
-  # ---The ORT DOWNLOADER PRE REQ
+  # ---ORT DOWNLOADER prereq
   local SHORT_SHA="${SW_VERSION:-$CI_COMMIT_SHORT_SHA}"
   SW_VERSION="$(echo "${SHORT_SHA}" | cut -c1-7)"
   export SW_VERSION
-  export SW_NAME="${SW_NAME:-$CI_PROJECT_TITLE}"
-  export VCS_REVISION="${VCS_REVISION:-$CI_COMMIT_SHA}"
   export VCS_URL="${VCS_URL:-"ssh://git@${CI_SERVER_HOST}/${UPSTREAM_PROJECT_PATH}"}"
   #-----------------------------
 
@@ -79,8 +76,6 @@ set_default_vars() {
 }
 
 ort_conf() {
-
-  export PROJECT_DIR="${PROJECT_DIR:-"project"}"
 
   export ORT_CLI="/opt/ort/bin/ort"
   export ORT_CLI_CONFIG_FILE="${ORT_CONFIG_DIR}/ort.conf"
@@ -163,7 +158,7 @@ setup_ort_config_dir() {
   mkdir -p "$ORT_CONFIG_DIR" && cd "$ORT_CONFIG_DIR"
   git init -q
   git remote add origin "$ORT_CONFIG_REPO_URL"
-  ORT_CONFIG_REVISION=${ORT_CONFIG_REVISION:-$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')}
+
   git fetch --depth 1 origin "$ORT_CONFIG_REVISION"
   git checkout FETCH_HEAD
   ORT_CONFIG_REVISION="$(git rev-parse HEAD)"

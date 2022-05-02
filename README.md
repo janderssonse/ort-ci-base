@@ -39,9 +39,9 @@ After a few after-work evenings hack sessions I had:
 * added tests (bats-core) and made it more testable by dividing into functions etc.
 * clearly separated image building and workflow runs
 
-And with this Base I could the PoC GitHub action/revised GitLab CI project mentioned earlier.
+And with this Base I could PoC GitHub action/revised GitLab CI project mentioned earlier.
 
-The future is unknown. It works for my use cases currently, I will clean it up, test and document it further. I think I will add more CI variants time allowing. Should the ORT project want to use anything from these projects in the future, I would gladly see it there instead of under my user.
+It works for my use cases currently, I will clean it up, test and document it further. I think I will add more CI variants time allowing. After speaking with the ORT project, they were interested in parts or whole possibly ending up under their umbrella, which would be supernice!
 
 Note: I think the scripts with would be quite easy to submit as PRs to the upstreams GitLab project really, in small steps if the would want to use the modified scripts with tests added or/and head this way. I made efforts to not stray away from them, reusing same variables, mostly same logic, just making things more configurable.
 
@@ -104,7 +104,7 @@ Please also see the [Contributor Guide](docs/CONTRIBUTING.adoc)
 Scripts under /src and /docker/Dockerfile.ci are
 
 Copyright (C) 2020-2022 HERE Europe B.V.
-(but with additions/refactoring)
+(but with minor additions/refactoring)
 Copyright (C) 2022 Josef Andersson)
 
 The main project is otherwise under
